@@ -22,6 +22,10 @@ export const AppRouter = () => {
           element: <RegisterPage />,
         },
         {
+          path: '',
+          element: <Navigate to={'/auth/login'} />,
+        },
+        {
           path: '*',
           element: <Navigate to={'/auth/login'} />,
         },
