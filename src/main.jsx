@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { JournalApp } from './JournalApp.jsx';
+import { AppRouter } from './router/AppRouter.jsx';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <JournalApp />
+    <AppRouter />
   </React.StrictMode>
 );
