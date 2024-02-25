@@ -28,7 +28,7 @@ export const Navbar = ({ drawerWidth }) => {
           <Typography variant='h6' noWrap component='div'>
             Journal App
           </Typography>
-          <IconButton color='error'>
+          <IconButton color='inherit'>
             <LogoutOutlined />
           </IconButton>
         </Grid>
