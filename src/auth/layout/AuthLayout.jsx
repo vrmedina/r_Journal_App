@@ -10,7 +10,7 @@ export const AuthLayout = ({ children, title = '' }) => {
       justifyContent={'center'}
       sx={{
         minHeight: '100vh',
-        backgroundColor: 'primary.main',
+        backgroundColor: 'primary.dark',
         padding: 4,
       }}
     >
@@ -20,7 +20,7 @@ export const AuthLayout = ({ children, title = '' }) => {
         xs={3}
         sx={{
           width: { sm: 450 },
-          backgroundColor: 'white',
+          backgroundColor: 'background.default',
           padding: 3,
           borderRadius: 2,
         }}
