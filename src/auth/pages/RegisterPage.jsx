@@ -4,17 +4,22 @@ import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks/useForm';
 
 import validator from 'validator';
+import { useState } from 'react';
 
 const formData = {
   displayName: 'Victor Medina',
   email: 'victor@test.com',
-  password: '123456',
+  password: 'victorMM1998*',
 };
 
 const formValidations = {
   displayName: [
-    (value) => validator.isAlpha(value + ''),
-    'El nombre debe tener 3 caracteres o más, no puede contener números',
+    (value) =>
+      validator.matches(
+        value + '',
+        new RegExp('^([a-zA-Zà-úÀ-Ú]{2,})+\\s+([a-zA-Zà-úÀ-Ú\\s]{2,})+$')
+      ),
+    'Por favor escribe tu nombre completo',
   ],
   email: [
     (value) => validator.isEmail(value + ''),
@@ -27,13 +32,15 @@ const formValidations = {
 };
 
 export const RegisterPage = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const {
     formState,
     displayName,
     email,
     password,
     onInputChange,
-    formIsValid,
+    isFormValid,
     displayNameIsValid,
     emailIsValid,
     passwordIsValid,
@@ -41,11 +48,16 @@ export const RegisterPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
+    // if (isFormValid) return;
+    console.log(formState);
+    setFormSubmitted(true);
     // dispatch(checkingAuthentication());
   };
 
   return (
     <AuthLayout title='Crear cuenta'>
+      <h1>Form Valido: {isFormValid ? 'SI' : 'NO'}</h1>
       <form onSubmit={onSubmit}>
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -57,8 +69,8 @@ export const RegisterPage = () => {
               name='displayName'
               value={displayName}
               onChange={onInputChange}
-              error
-              helperText='El nombre es obligatorio'
+              error={!!displayNameIsValid && formSubmitted}
+              helperText={displayNameIsValid}
             />
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -70,6 +82,8 @@ export const RegisterPage = () => {
               name='email'
               value={email}
               onChange={onInputChange}
+              error={!!emailIsValid && formSubmitted}
+              helperText={emailIsValid}
             />
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -81,6 +95,8 @@ export const RegisterPage = () => {
               name='password'
               value={password}
               onChange={onInputChange}
+              error={!!passwordIsValid && formSubmitted}
+              helperText={passwordIsValid}
             />
           </Grid>
           <Grid container spacing={2} sx={{ mt: 1, mb: 2 }}>
