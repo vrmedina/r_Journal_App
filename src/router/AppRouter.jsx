@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import {
   Navigate,
   RouterProvider,
@@ -6,8 +7,15 @@ import {
 import { JournalApp } from '../JournalApp';
 import { JournalPage } from '../journal/pages/JournalPage';
 import { LoginPage, RegisterPage } from '../auth/pages';
+import { CheckingAuth } from '../ui';
 
 export const AppRouter = () => {
+  const { status } = useSelector((state) => state.auth);
+
+  if (status === 'checking') {
+    return <CheckingAuth />;
+  }
+
   const appRouter = createBrowserRouter([
     {
       path: '/auth',
