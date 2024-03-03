@@ -20,7 +20,7 @@ export const SidebarItem = ({ id, title = '', body, date, imagesUrl = [] }) => {
   };
 
   const newTitle = useMemo(() => {
-    return title.length > 25 ? title.substring(0, 25) + '...' : title;
+    return title.length > 20 ? title.substring(0, 20) + '...' : title;
   }, [title]);
 
   return (
@@ -30,8 +30,8 @@ export const SidebarItem = ({ id, title = '', body, date, imagesUrl = [] }) => {
           <TurnedInNot />
         </ListItemIcon>
         <Grid container>
-          <ListItemText primary={newTitle} />
-          <ListItemText secondary={body} />
+          <ListItemText sx={{ width: '100%' }} primary={newTitle} />
+          <ListItemText sx={{ width: '100%' }} secondary={body} />
         </Grid>
       </ListItemButton>
     </ListItem>
