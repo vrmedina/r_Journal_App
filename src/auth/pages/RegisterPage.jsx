@@ -75,7 +75,7 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout title='Crear cuenta'>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__faster'>
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
@@ -137,7 +137,7 @@ export const RegisterPage = () => {
             </Grid>
           </Grid>
 
-          <Grid container direction={'row'} justifyContent={'end'}>
+          <Grid container direction={'row'} justifyContent={'end'} sx={{mt: 1}}>
             <Typography sx={{ mr: 1 }}>¿Ya tienes una cuenta?</Typography>
             <Link component={RouterLink} color='inherit' to='/auth/login'>
               <Typography>Iniciar sesion</Typography>

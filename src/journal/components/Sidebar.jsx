@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { TurnedInNot } from '@mui/icons-material';
 import {
   Box,
@@ -14,6 +15,8 @@ import {
 } from '@mui/material';
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
+  const { displayName } = useSelector((state) => state.auth);
+
   return (
     <Box
       component='nav'
@@ -29,7 +32,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
       >
         <Toolbar>
           <Typography variant='h6' noWrap component='div'>
-            Nombre de Usuario
+            {displayName}
           </Typography>
         </Toolbar>
         <Divider />
@@ -41,8 +44,12 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
                   <TurnedInNot />
                 </ListItemIcon>
                 <Grid container>
-                    <ListItemText primary={text} />
-                    <ListItemText secondary={'Este es un texto de prueba creado porque no tengo lorem ipsum'} />
+                  <ListItemText primary={text} />
+                  <ListItemText
+                    secondary={
+                      'Este es un texto de prueba creado porque no tengo lorem ipsum'
+                    }
+                  />
                 </Grid>
               </ListItemButton>
             </ListItem>
