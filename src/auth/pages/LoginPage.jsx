@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
-import { Google } from '@mui/icons-material';
+import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link as RouterLink } from "react-router-dom";
+import { Google } from "@mui/icons-material";
 import {
   Alert,
   Button,
@@ -9,11 +9,11 @@ import {
   Link,
   TextField,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
-import { AuthLayout } from '../layout/AuthLayout';
-import { useForm } from '../../hooks/useForm';
-import { startGoogleSignIn, startLoginWithEmail } from '../../store/auth';
+import { AuthLayout } from "../layout/AuthLayout";
+import { useForm } from "../../hooks/useForm";
+import { startGoogleSignIn, startLoginWithEmail } from "../../store/auth";
 
 export const LoginPage = () => {
   const { status, errorMessage } = useSelector((state) => state.auth);
@@ -21,11 +21,11 @@ export const LoginPage = () => {
   const dispatch = useDispatch();
 
   const { email, password, onInputChange } = useForm({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
-  const isAuthenticating = useMemo(() => status === 'checking', [status]);
+  const isAuthenticating = useMemo(() => status === "checking", [status]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -38,35 +38,38 @@ export const LoginPage = () => {
   };
 
   return (
-    <AuthLayout title='Iniciar sesion'>
-      <form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__faster'>
+    <AuthLayout title="Iniciar sesion">
+      <form
+        onSubmit={onSubmit}
+        className="animate__animated animate__fadeIn animate__faster"
+      >
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
-              label='Correo'
-              type='email'
-              placeholder='correo@google.com'
+              label="Correo"
+              type="email"
+              placeholder="correo@google.com"
               fullWidth
-              name='email'
+              name="email"
               value={email}
               onChange={onInputChange}
             />
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
-              label='Contraseña'
-              type='password'
-              placeholder='Contraseña'
+              label="Contraseña"
+              type="password"
+              placeholder="Contraseña"
               fullWidth
-              name='password'
+              name="password"
               value={password}
               onChange={onInputChange}
             />
           </Grid>
 
-          <Grid container sx={{ mt: 1 }} display={errorMessage ? '' : 'none'}>
+          <Grid container sx={{ mt: 1 }} display={errorMessage ? "" : "none"}>
             <Grid item xs={12}>
-              <Alert severity='error'>{errorMessage}</Alert>
+              <Alert severity="error">{errorMessage}</Alert>
             </Grid>
           </Grid>
 
@@ -74,8 +77,8 @@ export const LoginPage = () => {
             <Grid item xs={12} sm={6}>
               <Button
                 disabled={isAuthenticating}
-                type='submit'
-                variant='contained'
+                type="submit"
+                variant="contained"
                 fullWidth
               >
                 <Typography>Iniciar sesion</Typography>
@@ -85,7 +88,7 @@ export const LoginPage = () => {
               <Button
                 disabled={isAuthenticating}
                 onClick={onGoogleSignIn}
-                variant='outlined'
+                variant="outlined"
                 fullWidth
               >
                 <Google />
@@ -94,8 +97,8 @@ export const LoginPage = () => {
             </Grid>
           </Grid>
 
-          <Grid container direction={'row'} justifyContent={'end'}>
-            <Link component={RouterLink} color='inherit' to='/auth/register'>
+          <Grid container direction={"row"} justifyContent={"end"}>
+            <Link component={RouterLink} color="inherit" to="/auth/register">
               <Typography>Crear una cuenta</Typography>
             </Link>
           </Grid>

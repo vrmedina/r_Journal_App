@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
-import { TurnedInNot } from '@mui/icons-material';
+import { useSelector } from "react-redux";
+import { TurnedInNot } from "@mui/icons-material";
 import {
   Box,
   Divider,
@@ -12,32 +12,32 @@ import {
   ListItemText,
   Toolbar,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
   const { displayName } = useSelector((state) => state.auth);
 
   return (
     <Box
-      component='nav'
+      component="nav"
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
     >
       <Drawer
-        variant='permanent'
+        variant="permanent"
         open
         sx={{
-          display: { xs: 'block' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          display: { xs: "block" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
         }}
       >
         <Toolbar>
-          <Typography variant='h6' noWrap component='div'>
+          <Typography variant="h6" noWrap component="div">
             {displayName}
           </Typography>
         </Toolbar>
         <Divider />
         <List>
-          {['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'].map((text) => (
+          {["Enero", "Febrero", "Marzo", "Abril", "Mayo"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -47,7 +47,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
                   <ListItemText primary={text} />
                   <ListItemText
                     secondary={
-                      'Este es un texto de prueba creado porque no tengo lorem ipsum'
+                      "Este es un texto de prueba creado porque no tengo lorem ipsum"
                     }
                   />
                 </Grid>

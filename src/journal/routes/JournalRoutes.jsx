@@ -1,18 +1,18 @@
-import { Navigate } from 'react-router-dom';
-import { JournalPage } from '../pages/JournalPage';
-import { JournalApp } from '../../JournalApp';
+import { Navigate } from "react-router-dom";
+import { JournalPage } from "../pages/JournalPage";
+import { JournalApp } from "../../JournalApp";
 
 export const JournalRoutes = {
-  path: '/journal',
+  path: "/journal",
   element: <JournalApp />,
   children: [
     {
-      path: '',
+      path: "",
       element: <JournalPage />,
     },
     {
-      path: '*',
-      element: <Navigate to={'/journal/'} />,
+      path: "*",
+      element: <Navigate to={"/journal/"} />,
     },
   ],
 };
