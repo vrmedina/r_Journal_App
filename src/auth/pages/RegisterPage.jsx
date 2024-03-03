@@ -69,7 +69,7 @@ export const RegisterPage = () => {
     if (!isFormValid) return;
 
     if (isCheckingAuthentication) return;
-    
+
     dispatch(startSignUpWithEmail(formState));
   };
 
@@ -116,8 +116,13 @@ export const RegisterPage = () => {
               helperText={passwordIsValid}
             />
           </Grid>
-          <Grid container spacing={2} sx={{ mt: 1, mb: 2 }}>
-            <Grid item display={errorMessage ? '' : 'none'} xs={12}>
+          <Grid
+            container
+            display={errorMessage ? '' : 'none'}
+            spacing={2}
+            sx={{ mt: 1, mb: 2 }}
+          >
+            <Grid item xs={12}>
               <Alert severity='error'>{errorMessage}</Alert>
             </Grid>
             <Grid item xs={12}>
