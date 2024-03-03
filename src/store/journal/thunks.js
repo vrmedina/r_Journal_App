@@ -11,6 +11,7 @@ export const startCreateNote = () => {
       title: '',
       body: '',
       date: new Date().getTime(),
+      imagesUrl: [],
     };
     const newDoc = doc(
       collection(FirebaseDatabase, `journal-app/users/${uid}/journal/notes`)
@@ -28,5 +29,11 @@ export const startReadNotes = () => {
     if (!uid) throw new Error('El uid del usuario no existe');
     const notes = await loadNotes(uid);
     dispatch(readNotes(notes));
+  };
+};
+
+export const startSetActiveNote = (activeNote) => {
+  return async (dispatch) => {
+    dispatch(setActiveNote(activeNote));
   };
 };
