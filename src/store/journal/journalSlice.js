@@ -21,10 +21,11 @@ export const journalSlice = createSlice({
     },
     setSavingNote: (state) => {
       state.isSaving = true;
-      // Mensaje
+      state.messageSaved = '';
     },
     setActiveNote: (state, action) => {
       state.activeNote = action.payload;
+      state.messageSaved = '';
     },
     createNote: (state, action) => {
       state.notes.push(action.payload);
@@ -39,7 +40,7 @@ export const journalSlice = createSlice({
         if (note.id === action.payload.id) return action.payload;
         return note;
       });
-      // Mostrar mensaje
+      state.messageSaved = `La nota fué actualizada correctamente`;
     },
     deleteNote: (state, action) => {
       console.log(state);

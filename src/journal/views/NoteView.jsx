@@ -1,5 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
 import { useForm } from '../../hooks';
 import { setActiveNote, startSaveNote } from '../../store/journal';
 
@@ -9,7 +11,9 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
-  const { activeNote } = useSelector((state) => state.journal);
+  const { activeNote, isSaving, messageSaved } = useSelector(
+    (state) => state.journal
+  );
   const { title, body, date, imagesUrl, onInputChange, formState } =
     useForm(activeNote);
 
@@ -21,6 +25,16 @@ export const NoteView = () => {
   useEffect(() => {
     dispatch(setActiveNote(formState));
   }, [formState]);
+
+  useEffect(() => {
+    if (messageSaved.length > 0) {
+      Swal.fire({
+        title: 'Guardado exitoso!',
+        text: messageSaved,
+        icon: 'success',
+      });
+    }
+  }, [messageSaved]);
 
   const onSaveNote = () => {
     dispatch(startSaveNote());
@@ -41,7 +55,12 @@ export const NoteView = () => {
         </Typography>
       </Grid>
       <Grid item>
-        <Button onClick={onSaveNote} color='inherit' sx={{ p: 1 }}>
+        <Button
+          disabled={isSaving}
+          onClick={onSaveNote}
+          color='inherit'
+          sx={{ p: 1 }}
+        >
           <SaveOutlined />
           <Typography sx={{ fontSize: 16, ml: 1 }}>Guardar</Typography>
         </Button>
