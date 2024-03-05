@@ -3,10 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import { useForm } from '../../hooks';
-import { setActiveNote, startSaveNote } from '../../store/journal';
+import {
+  setActiveNote,
+  startDeleteNote,
+  startSaveNote,
+  startUploadFiles,
+} from '../../store/journal';
 
 import { ImageGallery } from '../components';
-import { SaveOutlined, UploadOutlined } from '@mui/icons-material';
+import {
+  DeleteOutline,
+  SaveOutlined,
+  UploadOutlined,
+} from '@mui/icons-material';
 import { Button, Grid, IconButton, TextField, Typography } from '@mui/material';
 
 export const NoteView = () => {
@@ -42,10 +51,18 @@ export const NoteView = () => {
     dispatch(startSaveNote());
   };
 
+  const onDeleteNote = () => {
+    dispatch(startDeleteNote());
+    Swal.fire({
+      title: "Elminación exitosa!",
+      text: "La nota fué eliminada correctamente",
+      icon: "success"
+    });
+  };
+
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
-    console.log('subiendo archivos');
-    // dispatch(startUploadFiles(target.files));
+    dispatch(startUploadFiles(target.files));
   };
 
   return (
@@ -53,15 +70,18 @@ export const NoteView = () => {
       className='animate__animated animate__fadeIn animate__faster'
       container
       direction='row'
-      justifyContent='space-between'
+      justifyContent='end'
       alignItems='center'
       sx={{ mb: 1 }}
     >
-      <Grid item>
-        <Typography fontSize={24} fontWeight='light'>
-          {dateString}
-        </Typography>
+      <Grid container>
+        <Grid item>
+          <Typography fontSize={24} fontWeight='light'>
+            {dateString}
+          </Typography>
+        </Grid>
       </Grid>
+
       <Grid item>
         <input
           type='file'
@@ -71,23 +91,34 @@ export const NoteView = () => {
           style={{ display: 'none' }}
         />
 
-        <IconButton
+        <Button
           disabled={isSaving}
           onClick={() => fileInputRef.current.click()}
           color='inherit'
-          sx={{ p: 1, mx: 2 }}
+          sx={{ p: 1 }}
         >
           <UploadOutlined />
-        </IconButton>
+          <Typography sx={{ fontSize: 16, ml: 1 }}>Subir</Typography>
+        </Button>
 
         <Button
           disabled={isSaving}
           onClick={onSaveNote}
           color='inherit'
-          sx={{ p: 1 }}
+          sx={{ p: 1, mx: 1 }}
         >
           <SaveOutlined />
           <Typography sx={{ fontSize: 16, ml: 1 }}>Guardar</Typography>
+        </Button>
+
+        <Button
+          disabled={isSaving}
+          onClick={onDeleteNote}
+          color='inherit'
+          sx={{ p: 1 }}
+        >
+          <DeleteOutline />
+          <Typography sx={{ fontSize: 16, ml: 1 }}>Borrar</Typography>
         </Button>
       </Grid>
 
@@ -116,8 +147,7 @@ export const NoteView = () => {
         />
       </Grid>
 
-      {/* Galeria de imagenes */}
-      <ImageGallery />
+      <ImageGallery images={activeNote.imagesUrl} />
     </Grid>
   );
 };

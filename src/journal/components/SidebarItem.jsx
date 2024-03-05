@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { startSetActiveNote } from '../../store/journal';
 
-import { TurnedInNot } from '@mui/icons-material';
+import { Brightness1, TurnedInNot } from '@mui/icons-material';
 import {
   Grid,
   ListItem,
@@ -13,6 +13,7 @@ import {
 
 export const SidebarItem = ({ id, title = '', body, date, imagesUrl = [] }) => {
   const dispatch = useDispatch();
+  const { activeNote } = useSelector((state) => state.journal);
 
   const onClickNote = () => {
     const note = { id, title, body, date, imagesUrl };
@@ -25,7 +26,10 @@ export const SidebarItem = ({ id, title = '', body, date, imagesUrl = [] }) => {
 
   return (
     <ListItem disablePadding>
-      <ListItemButton onClick={onClickNote}>
+      <ListItemButton
+        onClick={onClickNote}
+        sx={activeNote?.id === id ? { backgroundColor: 'Highlight' } : {}}
+      >
         <ListItemIcon>
           <TurnedInNot />
         </ListItemIcon>

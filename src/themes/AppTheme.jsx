@@ -4,7 +4,7 @@ import { darkTheme, lightTheme, purpleTheme } from "./";
 
 export const AppTheme = ({ children }) => {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={lightTheme}>
       <CssBaseline />
       {children}
     </ThemeProvider>
