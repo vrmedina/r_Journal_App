@@ -1,27 +1,27 @@
-import { useEffect, useMemo, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.css';
-import { useForm } from '../../hooks';
+import { useEffect, useMemo, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.css";
+import { useForm } from "../../hooks";
 import {
   setActiveNote,
   startDeleteNote,
   startSaveNote,
   startUploadFiles,
-} from '../../store/journal';
+} from "../../store/journal";
 
-import { ImageGallery } from '../components';
+import { ImageGallery } from "../components";
 import {
   DeleteOutline,
   SaveOutlined,
   UploadOutlined,
-} from '@mui/icons-material';
-import { Button, Grid, IconButton, TextField, Typography } from '@mui/material';
+} from "@mui/icons-material";
+import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
   const { activeNote, isSaving, messageSaved } = useSelector(
-    (state) => state.journal
+    (state) => state.journal,
   );
   const { title, body, date, imagesUrl, onInputChange, formState } =
     useForm(activeNote);
@@ -40,9 +40,9 @@ export const NoteView = () => {
   useEffect(() => {
     if (messageSaved.length > 0) {
       Swal.fire({
-        title: 'Guardado exitoso!',
+        title: "Guardado exitoso!",
         text: messageSaved,
-        icon: 'success',
+        icon: "success",
       });
     }
   }, [messageSaved]);
@@ -56,7 +56,7 @@ export const NoteView = () => {
     Swal.fire({
       title: "Elminación exitosa!",
       text: "La nota fué eliminada correctamente",
-      icon: "success"
+      icon: "success",
     });
   };
 
@@ -67,16 +67,16 @@ export const NoteView = () => {
 
   return (
     <Grid
-      className='animate__animated animate__fadeIn animate__faster'
+      className="animate__animated animate__fadeIn animate__faster"
       container
-      direction='row'
-      justifyContent='end'
-      alignItems='center'
+      direction="row"
+      justifyContent="end"
+      alignItems="center"
       sx={{ mb: 1 }}
     >
       <Grid container>
         <Grid item>
-          <Typography fontSize={24} fontWeight='light'>
+          <Typography fontSize={24} fontWeight="light">
             {dateString}
           </Typography>
         </Grid>
@@ -84,17 +84,17 @@ export const NoteView = () => {
 
       <Grid item>
         <input
-          type='file'
+          type="file"
           ref={fileInputRef}
           multiple
           onChange={onFileInputChange}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
         />
 
         <Button
           disabled={isSaving}
           onClick={() => fileInputRef.current.click()}
-          color='inherit'
+          color="inherit"
           sx={{ p: 1 }}
         >
           <UploadOutlined />
@@ -104,7 +104,7 @@ export const NoteView = () => {
         <Button
           disabled={isSaving}
           onClick={onSaveNote}
-          color='inherit'
+          color="inherit"
           sx={{ p: 1, mx: 1 }}
         >
           <SaveOutlined />
@@ -114,7 +114,7 @@ export const NoteView = () => {
         <Button
           disabled={isSaving}
           onClick={onDeleteNote}
-          color='inherit'
+          color="inherit"
           sx={{ p: 1 }}
         >
           <DeleteOutline />
@@ -124,24 +124,24 @@ export const NoteView = () => {
 
       <Grid container>
         <TextField
-          type='text'
-          variant='filled'
-          placeholder='Título de tu nota'
-          label='Titulo'
-          sx={{ border: 'none', my: 1 }}
+          type="text"
+          variant="filled"
+          placeholder="Título de tu nota"
+          label="Titulo"
+          sx={{ border: "none", my: 1 }}
           fullWidth
-          name='title'
+          name="title"
           value={title}
           onChange={onInputChange}
         />
         <TextField
-          type='text'
-          variant='filled'
+          type="text"
+          variant="filled"
           multiline
           minRows={5}
-          placeholder='¿Que deseas recordar hoy?'
+          placeholder="¿Que deseas recordar hoy?"
           fullWidth
-          name='body'
+          name="body"
           value={body}
           onChange={onInputChange}
         />

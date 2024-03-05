@@ -7,23 +7,23 @@ import {
   setPhotosToActiveNote,
   setSavingNote,
   updateNote,
-} from './';
-import { loadNotes, uploadFile } from '../../journal/helpers';
-import { FirebaseDatabase } from '../../firebase/config';
-import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
+} from "./";
+import { loadNotes, uploadFile } from "../../journal/helpers";
+import { FirebaseDatabase } from "../../firebase/config";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 
 export const startCreateNote = () => {
   return async (dispatch, getState) => {
     dispatch(setCreatingNote());
     const { uid } = getState().auth;
     const newNote = {
-      title: '',
-      body: '',
+      title: "",
+      body: "",
       date: new Date().getTime(),
       imagesUrl: [],
     };
     const newDoc = doc(
-      collection(FirebaseDatabase, `journal-app/users/${uid}/journal/notes`)
+      collection(FirebaseDatabase, `journal-app/users/${uid}/journal/notes`),
     );
     await setDoc(newDoc, newNote);
     newNote.id = newDoc.id;
@@ -35,7 +35,7 @@ export const startCreateNote = () => {
 export const startReadNotes = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
-    if (!uid) throw new Error('El uid del usuario no existe');
+    if (!uid) throw new Error("El uid del usuario no existe");
     const notes = await loadNotes(uid);
     dispatch(readNotes(notes));
   };
@@ -56,7 +56,7 @@ export const startSaveNote = () => {
     delete noteToFirestore.id;
     const docRef = doc(
       FirebaseDatabase,
-      `journal-app/users/${uid}/journal/notes/${activeNote.id}`
+      `journal-app/users/${uid}/journal/notes/${activeNote.id}`,
     );
     await setDoc(docRef, noteToFirestore, { merge: true });
     dispatch(updateNote(activeNote));
@@ -81,7 +81,7 @@ export const startDeleteNote = () => {
     const { activeNote } = getState().journal;
     const docRef = doc(
       FirebaseDatabase,
-      `journal-app/users/${uid}/journal/notes/${activeNote.id}`
+      `journal-app/users/${uid}/journal/notes/${activeNote.id}`,
     );
     await deleteDoc(docRef);
     dispatch(deleteNote(activeNote.id));

@@ -1,15 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { startCreateNote } from '../../store/journal/thunks';
+import { useDispatch, useSelector } from "react-redux";
+import { startCreateNote } from "../../store/journal/thunks";
 
-import { JournalLayout } from '../layout/JournalLayout';
-import { NoteView, NothingSelectedView } from '../views';
+import { JournalLayout } from "../layout/JournalLayout";
+import { NoteView, NothingSelectedView } from "../views";
 
-import { IconButton } from '@mui/material';
-import { AddOutlined } from '@mui/icons-material';
+import { IconButton } from "@mui/material";
+import { AddOutlined } from "@mui/icons-material";
 
 export const JournalPage = () => {
   const dispatch = useDispatch();
-  const {isSaving, activeNote} = useSelector(state => state.journal);
+  const { isSaving, activeNote } = useSelector((state) => state.journal);
 
   const onClickCreateNote = () => {
     dispatch(startCreateNote());
@@ -17,22 +17,17 @@ export const JournalPage = () => {
 
   return (
     <JournalLayout>
-
-      {
-        activeNote ? 
-        <NoteView /> :
-        <NothingSelectedView />
-      }  
+      {activeNote ? <NoteView /> : <NothingSelectedView />}
 
       <IconButton
         onClick={onClickCreateNote}
         disabled={isSaving}
-        size='large'
+        size="large"
         sx={{
-          color: 'white',
-          backgroundColor: 'primary.main',
-          ':hover': { backgroundColor: 'primary.main', opacity: 0.9 },
-          position: 'fixed',
+          color: "white",
+          backgroundColor: "primary.main",
+          ":hover": { backgroundColor: "primary.main", opacity: 0.9 },
+          position: "fixed",
           right: 50,
           bottom: 50,
         }}
