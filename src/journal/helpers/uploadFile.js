@@ -1,5 +1,6 @@
 export const uploadFile = async (file) => {
-  if (!file) throw new Error("El archivo no existe");
+  // if (!file) throw new Error("El archivo no existe");
+  if (!file) return null;
   const cloudUrl = "https://api.cloudinary.com/v1_1/vrmedina-cloud/upload";
   const formData = new FormData();
   formData.append("upload_preset", "react-journal");
@@ -13,7 +14,8 @@ export const uploadFile = async (file) => {
     const cloudResp = await resp.json();
     return cloudResp.secure_url;
   } catch (error) {
-    console.error(error);
-    throw new Error(error.message);
+    // console.error(error);
+    // throw new Error(error.message);
+    return null;
   }
 };
